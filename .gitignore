@@ -159,4 +159,4 @@ datasets/*
 
 # Training output
 bin/
-.lst
+*.lst
