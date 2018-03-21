@@ -17,8 +17,14 @@ def run(input_path, output_path, is_memory_intensive=False, pretrained_model=Non
 
     dataset = Dataset()
     dataset.load(input_path, generate_binary_sequences=True)
+    #
+    voc = Vocabulary()
+    
+    voc.retrieve(output_path)
+    dataset.output_size = voc.size
     dataset.save_metadata(output_path)
-    dataset.voc.save(output_path)
+    #
+    #dataset.voc.save(output_path)
 
     if not is_memory_intensive:
         dataset.convert_arrays()
@@ -34,9 +40,11 @@ def run(input_path, output_path, is_memory_intensive=False, pretrained_model=Non
         input_shape = dataset.input_shape
         output_size = dataset.output_size
         steps_per_epoch = dataset.size / BATCH_SIZE
-
-        voc = Vocabulary()
-        voc.retrieve(output_path)
+        print("input_shate "+str(input_shape))
+        print("output_size "+str(output_size))
+        print("steps_per_epoch "+str(steps_per_epoch))
+        #voc = Vocabulary()
+        #voc.retrieve(output_path)
 
         generator = Generator.data_generator(voc, gui_paths, img_paths, batch_size=BATCH_SIZE, generate_binary_sequences=True)
 
