@@ -29,7 +29,7 @@ class Generator:
 
                 token_sequence = [START_TOKEN]
                 for line in gui:
-                    line = line.replace(",", " ,").replace("\n", " \n")
+                    line = line.replace(",", " ,").replace("\n", "")
                     tokens = line.split(" ")
                     for token in tokens:
                         voc.append(token)
